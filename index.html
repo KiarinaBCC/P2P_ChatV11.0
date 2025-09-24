@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="google-site-verification" content="CJiicNCGiTJzpbrxZayKAP7j4w8jSGbrlQt8gbvxPYI" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrenjaP2Pchat</title>
+  <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.20.15/babel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/peerjs@1.4.7/dist/peerjs.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+  <meta name="google-site-verification" content="OZMTOirgwS9jiIYsThL-_0lWPI02ISlOCVIQQSDOIFQ" />
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div id="root"></div>
+  <script type="text/babel" data-presets="react,es2015,es2016,es2017">
+    // Fetch and transpile script.js with Babel, enabling ES Modules
+    fetch('script.js')
+      .then(response => response.text())
+      .then(code => {
+        const transpiled = Babel.transform(code, {
+          presets: ['react', 'es2015', 'es2016', 'es2017'],
+          plugins: ['transform-modules-commonjs']
+        }).code;
+        const script = document.createElement('script');
+        script.text = transpiled;
+        document.body.appendChild(script);
+      })
+      .catch(error => {
+        console.error('Error loading script.js:', error);
+        const root = document.getElementById('root');
+        root.innerHTML = '<div style="color: red; text-align: center; padding: 20px;">Error loading application: ' + error.message + '</div>';
+      });
+  </script>
+</body>
+</html>
